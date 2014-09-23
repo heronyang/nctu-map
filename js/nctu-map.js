@@ -1,5 +1,6 @@
 var lat = 0;
 var lon = 0;
+var acc = 0;
 
 var isFreezed = false;
 
@@ -20,8 +21,10 @@ function showPosition(position) {
     console.log("update");
     lat = position.coords.latitude;
     lon = position.coords.longitude;  
+    acc = position.coords.accuracy;  
     $('#lat').text(lat);
     $('#lon').text(lon);
+    $('#acc').text(acc);
 }
 
 function showError(error) {

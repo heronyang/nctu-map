@@ -17,6 +17,7 @@ function getLocation() {
 }
 
 function showPosition(position) {
+    console.log("update");
     lat = position.coords.latitude;
     lon = position.coords.longitude;  
     $('#lat').text(lat);

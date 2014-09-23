@@ -1,9 +1,16 @@
 var lat = 0;
 var lon = 0;
 
+var isFreezed = false;
+
 function getLocation() {
     if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition,showError);
+        navigator.geolocation.getCurrentPosition(showPosition, showError);
+        if(!isFreezed) {
+            setInterval(function () {
+                navigator.geolocation.getCurrentPosition(showPosition, showError);
+            }, 1000);
+        }
     } else { 
         alert("Geolocation is not supported by this browser.");
     }
@@ -17,6 +24,10 @@ function showPosition(position) {
 }
 
 function showError(error) {
+
+    if(isFreezed)   return;
+    isFreezed = true;
+
     switch(error.code) {
         case error.PERMISSION_DENIED:
             alert("User denied the request for Geolocation.");
